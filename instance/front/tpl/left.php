@@ -13,16 +13,15 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             
-            <?php if ($_SESSION['user']['user_type']=="Master Admin") {?>
+       
             <li><a href="<?php l('admin_') ?>">Admin</a></li>
             <li><a href="<?php l('report') ?>">Report</a></li>
             <li><a href="<?php l('send_text') ?>">Send Text</a></li>
             <li><a href="<?php l('chart') ?>">Chart</a></li>
                         <li><a href="<?php l('salesperson/list') ?>">Sales Person</a></li>
                         <li><a href="<?php l('customer/list') ?>">Customer</a></li>
-            <?php } 
- else {?> <li><a href="<?php l('customer/list') ?>">Customer</a></li>
-     <?php }?>
+ <li><a href="<?php l('customer/list') ?>">Customer</a></li>
+
         </ul>
         <?php $admin = ($_SESSION['user']['user_name']); ?>
         <ul class="nav navbar-nav navbar-right">
