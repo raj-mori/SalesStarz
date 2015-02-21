@@ -55,6 +55,16 @@
                                     "currency" => "usd",
                                     "card" => $_POST['stripeToken'],
                                     "description" => $_POST['email']));
+
+                                //flag change in db 
+                                $email = 'admin@admin.com';
+                                if ($_SESSION['user']['user_name'] == $email) {
+                                    qu("admin_users", array('is_stripe_payment' => 1), "user_name='{$email}'");
+                                } else {
+                                    qu("salesperson", array('is_stripe_payment' => 1), "email='{$_SESSION['user']['email']}'");
+                                }
+
+
                                 $success = '<div class="alert alert-success">
                 <strong>Success!</strong> Your payment was successful.
 				</div>';
@@ -199,6 +209,6 @@
                             </fieldset>
                     </form>
                 </div></div></div>
-   
-</body>
+
+    </body>
 </html>
