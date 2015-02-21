@@ -3,23 +3,36 @@
 $urlArgs = _cg("url_vars");
 
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] == '') {
-
-  
-    $new_customer_id = Customer::add($_REQUEST[fields]);
-    if ($new_customer_id > 0) {
-        $greetings = "New Customer inserted successfully";
+    if (!Customer::CheckCustomerUsername($_REQUEST['fields']['user_name'])) {
+        if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'])) {
+            $new_customer_id = Customer::add($_REQUEST[fields]);
+            if ($new_customer_id > 0) {
+                $greetings = "New Customer inserted successfully";
+            } else {
+                $error = "Unable to add new Customer";
+            }
+        } else {
+            $error = "Customer Email Available";
+        }
     } else {
-        $error = "Unable to add new Customer";
+        $error = "Customer User Name Available";
     }
 }
-
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] > 0) {
-    $new_customer_id = Customer::update($_REQUEST['fields'], $_REQUEST['fields']['customer_id']);
-    if ($new_customer_id > 0) {
-        $greetings = "Customer updated successfully";
-        unset($_REQUEST['fields']);
+    if (!Customer::CheckCustomerUsername($_REQUEST['fields']['user_name'],$_REQUEST['fields']['customer_id'])) {
+        if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'],$_REQUEST['fields']['customer_id'])) {
+            $new_customer_id = Customer::update($_REQUEST['fields'], $_REQUEST['fields']['customer_id']);
+            if ($new_customer_id > 0) {
+                $greetings = "Customer updated successfully";
+                unset($_REQUEST['fields']);
+            } else {
+                $error = "Customer Not exists";
+            }
+        } else {
+            $error = "Customer Email Available";
+        }
     } else {
-        $error = "Customer Not exists";
+        $error = "Customer User Name Available";
     }
 }
 
@@ -54,7 +67,7 @@ switch ($urlArgs[0]) {
             $phone = $view_data['phone_no'];
             $id_val = $urlArgs[1];
         }
-        break; 
+        break;
     case "add":
         $subTpl = "customer_add.php";
         $activeMenuAdd = "active";

@@ -27,8 +27,8 @@ class Customer {
         $map['email'] = 'email';
         $map['phone_no'] = 'phone_no';
         $map['credit_card'] = 'credit_card';
-        
- $data['salesperson']=$_SESSION['user']['id'];
+        $map['salesperson'] = 'salesperson';
+        $data['salesperson'] = $_SESSION['user']['id'];
         $ds = _bindArray($data, $map);
         return qi('customer', $ds);
     }
@@ -45,8 +45,8 @@ class Customer {
         $map['email'] = 'email';
         $map['phone_no'] = 'phone_no';
         $map['credit_card'] = 'credit_card';
-        
-        $data['salesperson']=$_SESSION['user']['id'];
+        $map['salesperson'] = 'salesperson';
+        $data['salesperson'] = $_SESSION['user']['id'];
         $ds = _bindArray($data, $map);
         $condition = "id = " . $id;
         return qu('customer', $ds, $condition);
@@ -58,16 +58,40 @@ class Customer {
     }
 
     public static function GetCustomerList() {
-        if($_SESSION['user']['user_type']=="Master Admin"){
-                    return q("SELECT * FROM customer ");
-        }  else {
-            return q("SELECT * FROM customer where salesperson =  ".$_SESSION['user']['id']);
-}
+        if ($_SESSION['user']['user_type'] == "Master Admin") {
+            return q("SELECT * FROM customer ");
+        } else {
+            return q("SELECT * FROM customer where salesperson =  " . $_SESSION['user']['id']);
+        }
+    }
 
+    public static function CheckCustomerUsername($username, $id = '') {
+        $where = '';
+        if ($id != '') {
+            $where.=" AND id != " . $id;
+        }
+        $where.=" AND user_name = '" . $username . "'";
+        //return q("SELECT id FROM role WHERE 1=1" . $where);
+        return qs("SELECT * FROM customer where 1=1" . $where);
+    }
+
+    public static function CheckCustomerEmail($email, $id = '') {
+        $where = '';
+        if ($id != '') {
+            $where.=" AND id != " . $id;
+        }
+        $where.=" AND email = '" . $email . "'";
+
+        return q("SELECT * FROM customer where 1=1" . $where);
     }
 
     public static function GetCustomerDetail($id) {
         return qs("SELECT * FROM customer where id=" . $id);
+    }
+
+    public static function GetSalespersonName($id) {
+        $res = qs("SELECT first_name,last_name FROM salesperson where id=" . $id);
+        return $res['first_name'] . " " . $res['last_name'];
     }
 
 }

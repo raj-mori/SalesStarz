@@ -20,13 +20,13 @@
                 <div class="form-group">
                     <label for="inputquestion" class="col-lg-2 control-label">First Name</label>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" name="fields[first_name]" id="address" value="<?php print $first_name; ?>" placeholder="Address" required>
+                        <input type="text" class="form-control" name="fields[first_name]" id="first_name" value="<?php print $first_name; ?>" placeholder="First Name" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputquestion" class="col-lg-2 control-label">Last Name</label>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" name="fields[last_name]" id="address" value="<?php print $last_name; ?>" placeholder="Address" required>
+                        <input type="text" class="form-control" name="fields[last_name]" id="last_name" value="<?php print $last_name; ?>" placeholder="Last Name" required>
                     </div>
                 </div>
                 <div class="form-group">

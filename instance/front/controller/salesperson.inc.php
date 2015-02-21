@@ -1,26 +1,47 @@
 <?php
 
+
+error_reporting(E_ALL);
 $urlArgs = _cg("url_vars");
 
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['salesperson_id'] == '') {
+	   $check_username = Salesperson::CheckSalespersonrUsername($_REQUEST['fields']['user_name']); 
+    if (empty($check_username)) {
+		$check_email = Salesperson::CheckSalespersonrEmail($_REQUEST['fields']['email']); 
+        if (empty($check_email)) {
+            $_REQUEST['fields']['password'] = md5($_REQUEST['fields']['password']);
 
-    $_REQUEST['fields']['password'] = md5($_REQUEST['fields']['password']);
-
-    $new_salesperson_id = Salesperson::add($_REQUEST[fields]);
-    if ($new_salesperson_id > 0) {
-        $greetings = "New Salesperson inserted successfully";
+            $new_salesperson_id = Salesperson::add($_REQUEST['fields']);
+            if ($new_salesperson_id > 0) {
+                $greetings = "New Salesperson inserted successfully";
+            } else {
+                $error = "Unable to add new Salesperson";
+            }
+        } else {
+            $error = "Sales Person Email Available";
+        }
     } else {
-        $error = "Unable to add new Salesperson";
+        $error = "Sales Person User Name Available";
     }
-}
+} 
 
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['salesperson_id'] > 0) {
-    $new_salesperson_id = Salesperson::update($_REQUEST['fields'], $_REQUEST['fields']['salesperson_id']);
-    if ($new_salesperson_id > 0) {
-        $greetings = "Salesperson updated successfully";
-        unset($_REQUEST['fields']);
+	 $check_username = Salesperson::CheckSalespersonrUsername($_REQUEST['fields']['user_name'], $_REQUEST['fields']['salesperson_id']); 
+    if (empty($check_username)) {
+		$check_email=Salesperson::CheckSalespersonrEmail($_REQUEST['fields']['email'], $_REQUEST['fields']['salesperson_id']);
+        if (empty($check_email)) {
+            $new_salesperson_id = Salesperson::update($_REQUEST['fields'], $_REQUEST['fields']['salesperson_id']);
+            if ($new_salesperson_id > 0) {
+                $greetings = "Salesperson updated successfully";
+                unset($_REQUEST['fields']);
+            } else {
+                $error = "Salesperson Not exists";
+            }
+        } else {
+            $error = "Sales Person Email Available";
+        }
     } else {
-        $error = "Salesperson Not exists";
+        $error = "Sales Person User Name Available";
     }
 }
 
@@ -80,4 +101,5 @@ switch ($urlArgs[0]) {
 
 $jsInclude = "salesperson.js.php";
 _cg("page_title", "Sales Person");
+
 ?>
