@@ -25,32 +25,43 @@
                 <div class="form-group">
                     <label for="inputquestion" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" name="fields[email]" id="email" value="<?php print $email; ?>" placeholder="Email" required>
+                        <input type="email" class="form-control" name="fields[email]" id="email" value="<?php print $email; ?>" placeholder="Email" required>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label for="inputquestion" class="col-lg-2 control-label">Mail Subject</label>
+                    <div class="col-lg-5">
+                        <input type="text" class="form-control" name="fields[mail_subject]" id="mail_subject" value="<?php print $mail_subject; ?>" placeholder="Mail Subject" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputquestion" class="col-lg-2 control-label">Mail Content</label>
+                    <div class="col-lg-5">
+                        <textarea type="text" class="form-control" name="fields[mail_content]" id="mail_content" placeholder="Mail Content" required><?php print $mail_content; ?></textarea>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="inputquestion" class="col-lg-2 control-label">Phone No</label>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" name="fields[phone_no]" id="phone" value="<?php print $phone; ?>" placeholder="Phone No" required>
+                        <input type="number" class="form-control" name="fields[phone_no]" id="phone" value="<?php print $phone; ?>" placeholder="Phone No" required>
                     </div>
                 </div>
-<!--                <div class="form-group">
-                    <label for="inputquestion" class="col-lg-2 control-label">Credit Card No.</label>
-                    <div class="col-lg-5">
-                        <input type="text" class="form-control" name="fields[credit_card]" id="Last Name " value="<?php print $credit_card; ?>" placeholder="Credit Card No." required>
-                    </div>
+                <!--                <div class="form-group">
+                                    <label for="inputquestion" class="col-lg-2 control-label">Credit Card No.</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" name="fields[credit_card]" id="Last Name " value="<?php print $credit_card; ?>" placeholder="Credit Card No." required>
+                                    </div>
+                                </div>
+                                <div class="form-group">-->
+                <div class="col-lg-offset-2 col-lg-10">
+                    <input type="hidden" name="fields[customer_id]" id="user_id" value="<?php print $id_val; ?>">
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-                <div class="form-group">-->
-                    <div class="col-lg-offset-2 col-lg-10">
-                        <input type="hidden" name="fields[customer_id]" id="user_id" value="<?php print $id_val; ?>">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </div>
-            </form>
-
         </div>
+        </form>
+
     </div>
+</div>
 
 </div>

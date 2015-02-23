@@ -25,6 +25,8 @@ class Customer {
         $map['first_name'] = 'first_name';
         $map['last_name'] = 'last_name';
         $map['email'] = 'email';
+        $map['mail_subject'] = 'mail_subject';
+        $map['mail_content'] = 'mail_content';
         $map['phone_no'] = 'phone_no';
         $map['credit_card'] = 'credit_card';
         $map['salesperson'] = 'salesperson';
@@ -43,6 +45,8 @@ class Customer {
         $map['first_name'] = 'first_name';
         $map['last_name'] = 'last_name';
         $map['email'] = 'email';
+        $map['mail_subject'] = 'mail_subject';
+        $map['mail_content'] = 'mail_content';
         $map['phone_no'] = 'phone_no';
         $map['credit_card'] = 'credit_card';
         $map['salesperson'] = 'salesperson';
@@ -57,11 +61,16 @@ class Customer {
         return qd('customer', $condition);
     }
 
-    public static function GetCustomerList() {
-        if ($_SESSION['user']['user_type'] == "Master Admin") {
-            return q("SELECT * FROM customer ");
+    public static function GetCustomerList($id) {
+
+        if ($id != '') {
+            return q("SELECT * FROM customer where salesperson =  " . $id);
         } else {
-            return q("SELECT * FROM customer where salesperson =  " . $_SESSION['user']['id']);
+            if ($_SESSION['user']['user_type'] == "Master Admin") {
+                return q("SELECT * FROM customer ");
+            } else {
+                return q("SELECT * FROM customer where salesperson =  " . $_SESSION['user']['id']);
+            }
         }
     }
 

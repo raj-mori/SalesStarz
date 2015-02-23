@@ -16,6 +16,37 @@
 
     </div>
 </div>
+
+<div class="modal fade" id="callModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" id="div1">
+                <div class="alert alert-success" id="success" >
+                </div>
+
+
+                </br>
+                <div style="text-align:right;">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+
+
+                </div>
+            </div>
+            <div class="modal-body" id="div2">
+                <div class="alert alert-danger" id="error" >
+                </div>
+
+
+                </br>
+                <div style="text-align:right;">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <?php include_once('message.php') ?>
 
 <?php include $subTpl; ?>

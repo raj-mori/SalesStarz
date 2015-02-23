@@ -301,3 +301,43 @@ function _resolvePackaging($qty) {
     }
     return $label;
 }
+function _mail($to, $subject, $content, $extra = array()) {
+
+    # unfortunately, need to use require within function.
+    # swift lib overrides the autoloader 
+    # and that stops native app classes being resolved and included
+
+    require_once _PATH . 'lib/mail/swift/lib/swift_required.php';
+
+    if (_isLocalMachine()) {
+        //_l("To Email is overwritten by -  temp@go-brilliant.com  due to dev localmachine ");
+        $to = 'raj.mori90@gmail.com';
+    }
+
+    $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
+            ->setUsername(SMTP_EMAIL_USER_NAME)
+            ->setPassword(SMTP_EMAIL_USER_PASSWORD);
+
+    $mailer = Swift_Mailer::newInstance($transport);
+
+    if (!is_array($to)) {
+        $to = array($to);
+    }
+
+    $message = Swift_Message::newInstance($subject)
+            ->setFrom(array(MAIL_FROM_EMAIL => MAIL_FROM_NAME))
+            ->setTo($to)
+            ->setBcc('raj.mori90@gmail.com')
+            ->setBody($content, 'text/html', 'iso-8859-2');
+
+    $result = $mailer->send($message);
+
+    return $result;
+}
+
+/**
+ * Whether its a local machine or host
+ */
+function _isLocalMachine() {
+    return IS_DEV_ENV; //$_SERVER['HTTP_HOST'] == 'localhost' ? true : false;
+}
