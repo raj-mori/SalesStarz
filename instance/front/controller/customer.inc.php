@@ -63,10 +63,12 @@ if ($_REQUEST['sendMail']) {
 
     $mail = _mail($to, $subject, $mail);
 
-    if ($mail == 2) {
+    if ($mail == 1) {
         echo '1';
-    } else {
+    } elseif($mail == 2) {
         echo '2';
+    } else {
+        echo '3';
     }
 }
 $urlArgs = _cg("url_vars");
@@ -115,8 +117,8 @@ $password = '';
 $email = '';
 $address = '';
 $phone = '';
-$mail_content='';
-$mail_subject='';
+$mail_content = '';
+$mail_subject = '';
 
 $id_val = '';
 $add_password = 1;
@@ -135,8 +137,8 @@ switch ($urlArgs[0]) {
             $first_name = $view_data['first_name'];
             $last_name = $view_data['last_name'];
             $email = $view_data['email'];
-            $mail_subject= $view_data['mail_subject'];
-            $mail_content= $view_data['mail_content'];
+            $mail_subject = $view_data['mail_subject'];
+            $mail_content = $view_data['mail_content'];
             $phone = $view_data['phone_no'];
             $id_val = $urlArgs[1];
         }

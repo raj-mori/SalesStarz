@@ -30,27 +30,28 @@
             type: "post",
             data: {sendMail: 1, cust_id: id},
             success: function(r) {
+              
                 if (r == 1) {
 
                     $("#success").html('Mail Sent Successfully!');
                 }
-                if (r == 2)
+                else if (r == 2)
+                {
+                    $("#div1").hide();
+                    $("#div2").show();
+                    $("#error").html('Mail Sent Successfully!');
+                }
+                else
                 {
                     $("#div1").hide();
                     $("#div2").show();
                     $("#error").html('Sorry!.. send Mail failed');
                 }
-                if (r == 3)
-                {
-                    $("#div1").hide();
-                    $("#div2").show();
-                    $("#error").html('Sorry!.. Authentication failure');
-                }
 
             }
         });
     }
-
+//send text using clicktell
     function send()
     {
 

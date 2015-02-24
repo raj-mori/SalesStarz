@@ -13,7 +13,7 @@
      
                <?php print $content; ?>
                 <br />
-                For Stripe Payment <a href="<?php print _U?>stripe_co/<?php print $to?>">Click Here</a>
+                For Stripe Payment <a href="<?php print _U?>stripe_co">Click Here</a>
             </td>
         </tr>
          <tr>
