@@ -10,10 +10,10 @@
         </tr>
           <tr>
             <td class="text" style=" font-family:verdana;color:#000000; text-decoration:none;font-size:11px;line-height:18px;padding-left:20px;height:50px">
-            
+     
                <?php print $content; ?>
                 <br />
-      
+                For Stripe Payment <a href="<?php print _U?>stripe_co/<?php print $to?>">Click Here</a>
             </td>
         </tr>
          <tr>

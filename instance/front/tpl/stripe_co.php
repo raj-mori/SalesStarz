@@ -1,3 +1,43 @@
+<?php
+
+require 'lib/Stripe.php';
+
+if ($_POST) {
+    Stripe::setApiKey("sk_test_R6QudjkDVwAUL0RhmV0MfbiR");
+    $error = '';
+    $success = '';
+
+    try {
+        if (empty($_POST['street']) || empty($_POST['city']) || empty($_POST['zip']))
+            throw new Exception("Fill out all required fields.");
+        if (!isset($_POST['stripeToken']))
+            throw new Exception("The Stripe Token was not generated correctly");
+        Stripe_Charge::create(array("amount" => 4000,
+            "currency" => "usd",
+            "card" => $_POST['stripeToken'],
+            "description" => $_POST['email']));
+
+        //flag change in db 
+        qu("customer", array('is_stripe_payment' => 1), "email='{$_POST['email']}'");
+
+//        $email = 'admin@admin.com';
+//        if ($_SESSION['user']['user_name'] == $email) {
+//            qu("admin_users", array('is_stripe_payment' => 1), "user_name='{$email}'");
+//        } else {
+//                               qu("salesperson", array('is_stripe_payment' => 1), "email='{$_SESSION['user']['email']}'");
+//        }
+
+
+        $success = '<div class="alert alert-success">
+                <strong>Success!</strong> Your payment was successful.
+				</div>';
+    } catch (Exception $e) {
+        $error = '<div class="alert alert-danger">
+			  <strong>Error!</strong> ' . $e->getMessage() . '
+			  </div>';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -38,43 +78,8 @@
                             <p>This payment form requires your browser to have JavaScript enabled. Please activate JavaScript and reload this page. Check <a href="http://enable-javascript.com" target="_blank">enable-javascript.com</a> for more informations.</p>
                         </div>
                         </noscript>
-                        <?php
-                        require 'lib/Stripe.php';
-
-                        if ($_POST) {
-                            Stripe::setApiKey("sk_test_R6QudjkDVwAUL0RhmV0MfbiR");
-                            $error = '';
-                            $success = '';
-
-                            try {
-                                if (empty($_POST['street']) || empty($_POST['city']) || empty($_POST['zip']))
-                                    throw new Exception("Fill out all required fields.");
-                                if (!isset($_POST['stripeToken']))
-                                    throw new Exception("The Stripe Token was not generated correctly");
-                                Stripe_Charge::create(array("amount" => 4000,
-                                    "currency" => "usd",
-                                    "card" => $_POST['stripeToken'],
-                                    "description" => $_POST['email']));
-
-                                //flag change in db 
-                                $email = 'admin@admin.com';
-                                if ($_SESSION['user']['user_name'] == $email) {
-                                    qu("admin_users", array('is_stripe_payment' => 1), "user_name='{$email}'");
-                                } else {
-                                    qu("salesperson", array('is_stripe_payment' => 1), "email='{$_SESSION['user']['email']}'");
-                                }
 
 
-                                $success = '<div class="alert alert-success">
-                <strong>Success!</strong> Your payment was successful.
-				</div>';
-                            } catch (Exception $e) {
-                                $error = '<div class="alert alert-danger">
-			  <strong>Error!</strong> ' . $e->getMessage() . '
-			  </div>';
-                            }
-                        }
-                        ?>
                         <div class="alert alert-danger" id="a_x200" style="display: none;"> <strong>Error!</strong> <span class="payment-errors"></span> </div>
                         <span class="payment-success">
                             <?= $success ?>
