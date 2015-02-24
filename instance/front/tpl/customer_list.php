@@ -21,7 +21,9 @@
                             <th>Phone No</th>
                             <?php if ($_SESSION['user']['user_type'] == "Master Admin") { ?> <th>Salesperson</th><?php } ?>
 
-                            <?php if ($_SESSION['user']['user_type'] != "Master Admin") { ?> <th>Action</th><?php } ?>
+                            <?php // if ($_SESSION['user']['user_type'] != "Master Admin") { ?>
+                            <th>Action</th>
+                                <?php // } ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +41,7 @@
                                 <?php if ($_SESSION['user']['user_type'] == "Master Admin") { ?>
                                     <td><?php print Customer::GetSalespersonName($each_task['salesperson']); ?></td>
                                 <?php } ?>
-                                <?php if ($_SESSION['user']['user_type'] != "Master Admin") { ?>
+                                <?php // if ($_SESSION['user']['user_type'] != "Master Admin") { ?>
                                     <td>
                                         <a href="<?php print _U ?>customer/edit/<?php print $each_task['id']; ?>"><i class="glyphicon glyphicon-edit" title="Edit"></i></a>
                                         <a href="javascript:void(0);" onclick="return DeleteUser('customer/delete/<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>
@@ -48,7 +50,7 @@
 
 
                                     </td>
-                                <?php } ?>
+                                <?php // } ?>
 
                             </tr>
                             <?php $cr++; ?>    
