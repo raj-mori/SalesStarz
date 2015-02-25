@@ -2,6 +2,7 @@
 
 require 'lib/Stripe.php';
 
+$customer=  qs("select * from  customer where id='{$_REQUEST['customer_id']}'");
 if ($_POST) {
     Stripe::setApiKey("sk_test_R6QudjkDVwAUL0RhmV0MfbiR");
     $error = '';
@@ -18,7 +19,10 @@ if ($_POST) {
             "description" => $_POST['email']));
 
         //flag change in db 
-        qu("customer", array('is_stripe_payment' => 1), "email='{$_POST['email']}'");
+        $data=  qs("select * from customer where id='{$_POST['cust_id']}'");
+        $payment = $data['is_stripe_payment']+1;
+        
+        qu("customer", array('is_stripe_payment' =>$payment), "id='{$_POST['cust_id']}'");
 
 //        $email = 'admin@admin.com';
 //        if ($_SESSION['user']['user_name'] == $email) {
@@ -64,7 +68,7 @@ if ($_POST) {
 
     </head>
     <body>
-        <div class="addAffiliates actionItem ">
+        <div class="addAffiliates actionItem " style="padding-top: 0px">
             <div class="panel panel-default">
                 <div class="panel-heading">Secure Payment</div>
                 <div class="panel-body">
@@ -135,7 +139,7 @@ if ($_POST) {
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="textinput">Email</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="email" maxlength="65" placeholder="Email" class="email form-control">
+                                    <input type="text" name="email" maxlength="65" value="<?php print $customer['email']?>" placeholder="Email" class="email form-control">
                                 </div>
                             </div>
                             <fieldset>
@@ -153,7 +157,7 @@ if ($_POST) {
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="textinput">Card Number</label>
                                     <div class="col-sm-3">
-                                        <input type="text" id="cardnumber" maxlength="19" placeholder="Card Number" class="card-number form-control">
+                                        <input type="text" id="cardnumber" maxlength="19" value="<?php print $customer['credit_card']?>" placeholder="Card Number" class="card-number form-control">
                                     </div>
                                 </div>
 
@@ -193,7 +197,7 @@ if ($_POST) {
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-offset-3 col-lg-10">
-
+                                        <input type="hidden" id="cust_id" name="cust_id" value="<?php print $_REQUEST['customer_id']?> "/>
                                         <button class="btn btn-success" type="submit">Pay Now</button>
                                     </div>
                                 </div>

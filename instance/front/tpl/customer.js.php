@@ -26,7 +26,7 @@
         $('#div1').show();
         $("#success").html('<img src="<?php print _MEDIA_URL ?>img/ajax-loader.gif" />  Connecting!.....');
         $.ajax({
-            url: _U + 'customer',
+            url: _U + 'customer/list',
             type: "post",
             data: {sendMail: 1, cust_id: id},
             success: function(r) {
@@ -37,9 +37,8 @@
                 }
                 else if (r == 2)
                 {
-                    $("#div1").hide();
-                    $("#div2").show();
-                    $("#error").html('Mail Sent Successfully!');
+                   
+                    $("#success").html('Mail Sent Successfully!');
                 }
                 else
                 {

@@ -9,7 +9,7 @@
  * @package Sales Starz
  * 
  */
-_R(lr('dashboard'));
+_R(lr('report'));
 
 _cg("page_title", "Dashboard");
 ?>

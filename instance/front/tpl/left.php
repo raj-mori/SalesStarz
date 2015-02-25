@@ -14,7 +14,7 @@
         <ul class="nav navbar-nav">
 
             <?php if ($_SESSION['user']['user_type'] == "Master Admin") { ?>
-                <li><a href="<?php l('admin_') ?>">Admin</a></li>
+                <!--<li><a href="<?php l('admin_') ?>">Admin</a></li>-->
                 <li><a href="<?php l('report') ?>">Report</a></li>
                 <li><a href="<?php l('send_text') ?>">Send Text</a></li>
                 <li><a href="<?php l('chart') ?>">Chart</a></li>

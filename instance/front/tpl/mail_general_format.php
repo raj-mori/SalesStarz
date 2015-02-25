@@ -1,4 +1,4 @@
-<table align="center" bgcolor="#efefef" border="1" cellpadding="0" cellspacing="0" style="font-family:verdana" width="60%">
+<table align="center" bgcolor="#efefef" border="0px" cellpadding="0" cellspacing="0" style="font-family:verdana" width="100%%">
 
     <tbody>
         <tr>
@@ -13,7 +13,7 @@
      
                <?php print $content; ?>
                 <br />
-                For Stripe Payment <a href="<?php print _U?>stripe_co">Click Here</a>
+                For Stripe Payment <a href="<?php print _U?>stripe_co?customer_id=<?php print $id ?>">Click Here</a>
             </td>
         </tr>
          <tr>

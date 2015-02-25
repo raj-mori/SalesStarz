@@ -36,8 +36,8 @@
 
                                     <a href="<?php print _U ?>salesperson/edit/<?php print $each_task['id']; ?>"><i class="glyphicon glyphicon-edit" title="Edit"></i></a>
                                     <a href="javascript:void(0);" onclick="return DeleteUser('salesperson/delete/<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>
-                                    <a href="<?php print _U ?>customer/list/<?php print $each_task['id']; ?>">
-                                                                            <span class="label label-info" style="cursor:pointer">Edit Customer</span>
+                                    <a href="<?php print _U ?>customer/list/<?php print $each_task['id']; ?>" style="text-decoration:none;">
+                                                                            <span class="label label-info" style="cursor:pointer">View Customer</span>
 </a>
 
                                 </td>

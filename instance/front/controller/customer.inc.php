@@ -30,24 +30,26 @@ if ($_REQUEST['send']) {
 
         if ($send[0] == "ID") {
             echo '1';
-            die;
+         
 
 //            echo "successnmessage ID: " . $send[1];
         } else {
             echo '2';
-            die;
+          
 //            echo "send message failed";
         }
     } else {
         echo '3';
-        die;
+      
 //        echo "Authentication failure: " . $ret[0];
     }
+    die;
 }
 //Mail
 if ($_REQUEST['sendMail']) {
     $data = qs("SELECT * FROM customer where id=" . $_REQUEST['cust_id']);
 
+    $id=$_REQUEST['cust_id'];
     $to = $data['email'];
     $subject = $data['mail_subject'];
     $content = $data['mail_content'];
@@ -70,6 +72,7 @@ if ($_REQUEST['sendMail']) {
     } else {
         echo '3';
     }
+    die;
 }
 $urlArgs = _cg("url_vars");
 

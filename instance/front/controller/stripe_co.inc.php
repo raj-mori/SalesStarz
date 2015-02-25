@@ -7,7 +7,8 @@
  */
 
 
+$no_visible_elements = true;
 
 $jsInclude = "stripe_co.js.php";
-_cg("page_title", "Stripe Payment Form");
+
 ?>

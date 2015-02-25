@@ -45,8 +45,8 @@
                                     <td>
                                         <a href="<?php print _U ?>customer/edit/<?php print $each_task['id']; ?>"><i class="glyphicon glyphicon-edit" title="Edit"></i></a>
                                         <a href="javascript:void(0);" onclick="return DeleteUser('customer/delete/<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>
-                                        <span class="label label-success" style="cursor:pointer" onclick="sendMail('<?php print $each_task['id']; ?>')">Send mail</span>
-                                        <span class="label label-primary" style="cursor:pointer" onclick="showText('<?php print $each_task['id']; ?>')">Send Text</span>
+                                        <span class="label label-success " style="cursor:pointer" onclick="sendMail('<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-send" ></i> Send mail</span>
+                                        <span class="label label-primary" style="cursor:pointer" onclick="showText()"><i class="glyphicon glyphicon-text-width" ></i> Send Text</span>
 
 
                                     </td>
