@@ -23,7 +23,7 @@
 
                             <?php // if ($_SESSION['user']['user_type'] != "Master Admin") { ?>
                             <th>Action</th>
-                                <?php // } ?>
+                            <?php // } ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,14 +42,16 @@
                                     <td><?php print Customer::GetSalespersonName($each_task['salesperson']); ?></td>
                                 <?php } ?>
                                 <?php // if ($_SESSION['user']['user_type'] != "Master Admin") { ?>
-                                    <td>
-                                        <a href="<?php print _U ?>customer/edit/<?php print $each_task['id']; ?>"><i class="glyphicon glyphicon-edit" title="Edit"></i></a>
-                                        <a href="javascript:void(0);" onclick="return DeleteUser('customer/delete/<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>
-                                        <span class="label label-success " style="cursor:pointer" onclick="sendMail('<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-send" ></i> Send mail</span>
-                                        <span class="label label-primary" style="cursor:pointer" onclick="showText()"><i class="glyphicon glyphicon-text-width" ></i> Send Text</span>
+                                <td>
+                                    <a href="<?php print _U ?>customer/edit/<?php print $each_task['id']; ?>"><i class="glyphicon glyphicon-edit" title="Edit"></i></a>
+                                    <a href="javascript:void(0);" onclick="return DeleteUser('customer/delete/<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>
+                                    <span class="label label-success " style="cursor:pointer" onclick="sendMail('<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-send" ></i> Send mail</span>
+                                    <!--<span class="label label-success " style="cursor:pointer" onclick="showMail('<?php print $each_task['id']; ?>', '<?php print $each_task['first_name']; ?>', '<?php print $each_task['last_name']; ?>')"><i class="glyphicon glyphicon-send" ></i> Send mail</span>-->
+
+                                    <span class="label label-primary" style="cursor:pointer" onclick="showText('<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-text-width" ></i> Send Text</span>
 
 
-                                    </td>
+                                </td>
                                 <?php // } ?>
 
                             </tr>

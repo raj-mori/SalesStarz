@@ -28,19 +28,29 @@ if ($_REQUEST['send']) {
         $ret = file($url);
         $send = explode(":", $ret[0]);
 
+        
+
+
         if ($send[0] == "ID") {
+
+            //flag change in db
+            $data = qs("select * from customer where id='{$_REQUEST['cust_id']}'");
+            $text_sent = $data['total_text_sent'] + 1;
+
+            qu("customer", array('total_text_sent' => $text_sent), "id='{$_REQUEST['cust_id']}'");
+
+            qi("customer_sales_info", array("task_column" => 'Text Send', "is_text_sent" => 1));
             echo '1';
-         
 
 //            echo "successnmessage ID: " . $send[1];
         } else {
             echo '2';
-          
+
 //            echo "send message failed";
         }
     } else {
         echo '3';
-      
+
 //        echo "Authentication failure: " . $ret[0];
     }
     die;
@@ -49,7 +59,7 @@ if ($_REQUEST['send']) {
 if ($_REQUEST['sendMail']) {
     $data = qs("SELECT * FROM customer where id=" . $_REQUEST['cust_id']);
 
-    $id=$_REQUEST['cust_id'];
+    $id = $_REQUEST['cust_id'];
     $to = $data['email'];
     $subject = $data['mail_subject'];
     $content = $data['mail_content'];
@@ -65,12 +75,19 @@ if ($_REQUEST['sendMail']) {
 
     $mail = _mail($to, $subject, $mail);
 
-    if ($mail == 1) {
+    if ($mail == 1 || $mail == 2) {
+
+        //flag change in db
+        $data = qs("select * from customer where id='{$id}'");
+        $mail_sent = $data['total_mail_sent'] + 1;
+
+        qu("customer", array('total_mail_sent' => $mail_sent), "id='{$id}'");
+
+        qi("customer_sales_info", array("task_column" => 'Mail Send', "is_mail_sent" => 1));
+
         echo '1';
-    } elseif($mail == 2) {
-        echo '2';
     } else {
-        echo '3';
+        echo '2';
     }
     die;
 }

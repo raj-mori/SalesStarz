@@ -2,6 +2,7 @@
 
     $(document).ready(function() {
 
+      
     });
     function DeleteUser(url) {
         delUrl = url;
@@ -12,12 +13,17 @@
         $("#myModal").modal("show");
     }
 
-    function showText()
+    function showMail(id, fname, lname)
     {
+        alert(fname);
+        $("#cust_id").val(id);
+        $("#cust_fname").val(fname);
+        $("#cust_lname").val(lname);
 
-        $("#showText").modal("show");
 
+        $("#sendmail").modal("show");
     }
+
     function sendMail(id)
     {
 
@@ -30,16 +36,12 @@
             type: "post",
             data: {sendMail: 1, cust_id: id},
             success: function(r) {
-              
+
                 if (r == 1) {
 
                     $("#success").html('Mail Sent Successfully!');
                 }
-                else if (r == 2)
-                {
-                   
-                    $("#success").html('Mail Sent Successfully!');
-                }
+
                 else
                 {
                     $("#div1").hide();
@@ -51,6 +53,13 @@
         });
     }
 //send text using clicktell
+
+    function showText(id)
+    {
+
+        $("#cust_id").val(id);
+        $("#showText").modal("show");
+    }
     function send()
     {
 
@@ -62,7 +71,7 @@
         $.ajax({
             url: _U + 'send_text',
             type: "post",
-            data: {send: 1, code: $("#country_code").val(), number: $("#number").val(), text: $("#text").val()},
+            data: {send: 1, code: $("#country_code").val(), number: $("#number").val(), text: $("#text").val(), cust_id: $("#cust_id").val()},
             success: function(r) {
                 if (r == 1) {
 

@@ -2,18 +2,18 @@
 $week_to = date('Y-m-d', strtotime("monday this week"));
 $week_from = date('Y-m-d', strtotime("sunday this week"));
 
-$week_data = q("Select sum(is_stripe_payment)as total from customer where Date(modified_at) >= '{$week_to}' AND Date(modified_at) <= '{$week_from}'");
+$week_data = q("Select sum(total_stripe_payment)as total from customer where Date(modified_at) >= '{$week_to}' AND Date(modified_at) <= '{$week_from}'");
 
 $month_to = date('Y-m-d', strtotime("first day of this month"));
 $month_from = date('Y-m-d', strtotime("last day of this month"));
 
-$month_data = q("Select sum(is_stripe_payment)as total from customer where Date(modified_at) >= '{$month_to}' AND Date(modified_at) <= '{$month_from}'");
+$month_data = q("Select sum(total_stripe_payment)as total from customer where Date(modified_at) >= '{$month_to}' AND Date(modified_at) <= '{$month_from}'");
 
 $year_to = date('Y-m-d', strtotime("first day of january this year"));
 $year_from = date('Y-m-d', strtotime("last day of december this year"));
 
 
-$year_data = q("Select sum(is_stripe_payment)as total from customer where Date(modified_at) >= '{$year_to}' AND Date(modified_at) <= '{$year_from}'");
+$year_data = q("Select sum(total_stripe_payment)as total from customer where Date(modified_at) >= '{$year_to}' AND Date(modified_at) <= '{$year_from}'");
 
 ?>
 
