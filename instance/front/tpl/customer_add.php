@@ -8,12 +8,12 @@ $urlArgs = _cg("url_vars");
         <div class="panel-heading">Add New Customer Detail</div> 
         <div class="panel-body">
             <form method="post" action="" class="form-horizontal" role="form">
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label for="inputquestion" class="col-lg-2 control-label">Username</label>
                     <div class="col-lg-5">
                         <input type="text" class="form-control" name="fields[user_name]" id="username" value="<?php print $user_name; ?>" placeholder="UserName" required>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="form-group">
                     <label for="inputquestion" class="col-lg-2 control-label">First Name</label>

@@ -21,7 +21,6 @@ class Customer {
 
         $map = array();
 
-        $map['user_name'] = 'user_name';
         $map['first_name'] = 'first_name';
         $map['last_name'] = 'last_name';
         $map['email'] = 'email';
@@ -39,9 +38,7 @@ class Customer {
         // Escape array for sql hijacking prevention
         $data = _escapeArray($fields);
         $map = array();
-
-
-        $map['user_name'] = 'user_name';
+     
         $map['first_name'] = 'first_name';
         $map['last_name'] = 'last_name';
         $map['email'] = 'email';

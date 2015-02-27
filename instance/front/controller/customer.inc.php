@@ -39,7 +39,7 @@ if ($_REQUEST['send']) {
 
             qu("customer", array('total_text_sent' => $text_sent), "id='{$_REQUEST['cust_id']}'");
 
-            qi("customer_sales_info", array("task_column" => 'Text Send', "is_text_sent" => 1));
+            qi("customer_sales_info", array("cust_id" => $_REQUEST['cust_id'] ,"task_column" => 'Text Send', "is_text_sent" => 1));
             echo '1';
 
 //            echo "successnmessage ID: " . $send[1];
@@ -83,7 +83,7 @@ if ($_REQUEST['sendMail']) {
 
         qu("customer", array('total_mail_sent' => $mail_sent), "id='{$id}'");
 
-        qi("customer_sales_info", array("task_column" => 'Mail Send', "is_mail_sent" => 1));
+        qi("customer_sales_info", array("cust_id" => $id ,"task_column" => 'Mail Send', "is_mail_sent" => 1));
 
         echo '1';
     } else {
@@ -94,7 +94,7 @@ if ($_REQUEST['sendMail']) {
 $urlArgs = _cg("url_vars");
 
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] == '') {
-    if (!Customer::CheckCustomerUsername($_REQUEST['fields']['user_name'])) {
+
         if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'])) {
             $new_customer_id = Customer::add($_REQUEST[fields]);
             if ($new_customer_id > 0) {
@@ -105,12 +105,11 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] == '') {
         } else {
             $error = "Customer Email Available";
         }
-    } else {
-        $error = "Customer User Name Available";
-    }
+  
 }
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] > 0) {
-    if (!Customer::CheckCustomerUsername($_REQUEST['fields']['user_name'], $_REQUEST['fields']['customer_id'])) {
+
+        
         if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'], $_REQUEST['fields']['customer_id'])) {
             $new_customer_id = Customer::update($_REQUEST['fields'], $_REQUEST['fields']['customer_id']);
             if ($new_customer_id > 0) {
@@ -122,9 +121,7 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] > 0) {
         } else {
             $error = "Customer Email Available";
         }
-    } else {
-        $error = "Customer User Name Available";
-    }
+
 }
 
 $addIcon = "plus";
@@ -132,7 +129,7 @@ $addLabel = "Add Customer";
 $action_type = "add";
 
 $type = '';
-$username = '';
+
 $password = '';
 $email = '';
 $address = '';
@@ -153,7 +150,7 @@ switch ($urlArgs[0]) {
         if ($urlArgs[1] > 0) {
             $view_data = Customer::GetCustomerDetail($urlArgs[1]);
 
-            $user_name = $view_data['user_name'];
+          
             $first_name = $view_data['first_name'];
             $last_name = $view_data['last_name'];
             $email = $view_data['email'];

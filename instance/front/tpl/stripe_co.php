@@ -25,15 +25,7 @@ if ($_POST) {
         $payment = $data['total_stripe_payment'] + 1;
 
         qu("customer", array('total_stripe_payment' => $payment), "id='{$_POST['cust_id']}'");
-        qi("customer_sales_info", array("task_column" => 'Stripe Payment', "is_stripe_payment" => 1));
-
-
-//        $email = 'admin@admin.com';
-//        if ($_SESSION['user']['user_name'] == $email) {
-//            qu("admin_users", array('is_stripe_payment' => 1), "user_name='{$email}'");
-//        } else {
-//                               qu("salesperson", array('is_stripe_payment' => 1), "email='{$_SESSION['user']['email']}'");
-//        }
+        qi("customer_sales_info", array("cust_id" => $_POST['cust_id'] ,"task_column" => 'Stripe Payment', "is_stripe_payment" => 1));
 
 
         $success = '<div class="alert alert-success">
