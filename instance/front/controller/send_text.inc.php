@@ -1,10 +1,12 @@
 <?php
 if ($_REQUEST['send']) {
 
-    $user = "Admin_SB24";
-    $password = "PKbXXGLKPIRYaT";
-    $api_id = "3526569";
-    $baseurl = "http://api.clickatell.com";
+    $click = qs("SELECT * FROM click_tell ");
+
+    $user = trim($click['user']);
+    $password = trim($click['password']);
+    $api_id = trim($click['api_id']);
+    $baseurl = trim($click['base_url']);
 
     $text = urlencode($_REQUEST['text']);
     $to = $_REQUEST['code'] . "" . $_REQUEST['number'];
@@ -17,6 +19,7 @@ if ($_REQUEST['send']) {
 
     // explode our response. return string is on first line of the data returned
     $sess = explode(":", $ret[0]);
+    
     if ($sess[0] == "OK") {
 
         $sess_id = trim($sess[1]); // remove any whitespace

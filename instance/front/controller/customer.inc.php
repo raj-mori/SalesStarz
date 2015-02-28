@@ -3,10 +3,12 @@
 //sending message using clicktell
 if ($_REQUEST['send']) {
 
-    $user = "Admin_SB24";
-    $password = "PKbXXGLKPIRYaT";
-    $api_id = "3526569";
-    $baseurl = "http://api.clickatell.com";
+    $click = qs("SELECT * FROM click_tell ");
+
+    $user = trim($click['user']);
+    $password = trim($click['password']);
+    $api_id = trim($click['api_id']);
+    $baseurl = trim($click['base_url']);
 
     $text = urlencode($_REQUEST['text']);
     $to = $_REQUEST['code'] . "" . $_REQUEST['number'];
@@ -28,9 +30,6 @@ if ($_REQUEST['send']) {
         $ret = file($url);
         $send = explode(":", $ret[0]);
 
-        
-
-
         if ($send[0] == "ID") {
 
             //flag change in db
@@ -39,7 +38,7 @@ if ($_REQUEST['send']) {
 
             qu("customer", array('total_text_sent' => $text_sent), "id='{$_REQUEST['cust_id']}'");
 
-            qi("customer_sales_info", array("cust_id" => $_REQUEST['cust_id'] ,"task_column" => 'Text Send', "is_text_sent" => 1));
+            qi("customer_sales_info", array("cust_id" => $_REQUEST['cust_id'], "task_column" => 'Text Send', "is_text_sent" => 1));
             echo '1';
 
 //            echo "successnmessage ID: " . $send[1];
@@ -83,7 +82,7 @@ if ($_REQUEST['sendMail']) {
 
         qu("customer", array('total_mail_sent' => $mail_sent), "id='{$id}'");
 
-        qi("customer_sales_info", array("cust_id" => $id ,"task_column" => 'Mail Send', "is_mail_sent" => 1));
+        qi("customer_sales_info", array("cust_id" => $id, "task_column" => 'Mail Send', "is_mail_sent" => 1));
 
         echo '1';
     } else {
@@ -95,33 +94,41 @@ $urlArgs = _cg("url_vars");
 
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] == '') {
 
-        if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'])) {
-            $new_customer_id = Customer::add($_REQUEST[fields]);
-            if ($new_customer_id > 0) {
-                $greetings = "New Customer inserted successfully";
-            } else {
-                $error = "Unable to add new Customer";
-            }
+    if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'])) {
+
+        $temp = explode("@", $_REQUEST['fields']['template']);
+        
+        $_REQUEST['fields']['mail_subject'] = $temp[0];
+        $_REQUEST['fields']['mail_content'] = $temp[1];
+
+        $new_customer_id = Customer::add($_REQUEST[fields]);
+        if ($new_customer_id > 0) {
+            $greetings = "New Customer inserted successfully";
         } else {
-            $error = "Customer Email Available";
+            $error = "Unable to add new Customer";
         }
-  
+    } else {
+        $error = "Customer Email Available";
+    }
 }
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] > 0) {
 
-        
-        if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'], $_REQUEST['fields']['customer_id'])) {
-            $new_customer_id = Customer::update($_REQUEST['fields'], $_REQUEST['fields']['customer_id']);
-            if ($new_customer_id > 0) {
-                $greetings = "Customer updated successfully";
-                unset($_REQUEST['fields']);
-            } else {
-                $error = "Customer Not exists";
-            }
-        } else {
-            $error = "Customer Email Available";
-        }
 
+    if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'], $_REQUEST['fields']['customer_id'])) {
+        $temp = explode("@", $_REQUEST['fields']['template']);
+        
+        $_REQUEST['fields']['mail_subject'] = $temp[0];
+        $_REQUEST['fields']['mail_content'] = $temp[1];
+        $new_customer_id = Customer::update($_REQUEST['fields'], $_REQUEST['fields']['customer_id']);
+        if ($new_customer_id > 0) {
+            $greetings = "Customer updated successfully";
+            unset($_REQUEST['fields']);
+        } else {
+            $error = "Customer Not exists";
+        }
+    } else {
+        $error = "Customer Email Available";
+    }
 }
 
 $addIcon = "plus";
@@ -150,7 +157,7 @@ switch ($urlArgs[0]) {
         if ($urlArgs[1] > 0) {
             $view_data = Customer::GetCustomerDetail($urlArgs[1]);
 
-          
+
             $first_name = $view_data['first_name'];
             $last_name = $view_data['last_name'];
             $email = $view_data['email'];

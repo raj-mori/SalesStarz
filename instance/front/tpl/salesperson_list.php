@@ -18,6 +18,8 @@
                             <th>Last Name </th> 
                             <th>email</th>
                             <th>Phone No</th>
+                            <th>Payment In $</th>
+
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -32,13 +34,15 @@
                                 <td><?php print $each_task['last_name']; ?> </td>
                                 <td><?php print $each_task['email']; ?> </td>
                                 <td><?php print $each_task['phone_no']; ?> </td>
+                                <td><?php print $each_task['stripe_payment']; ?> </td>
+
                                 <td>
 
                                     <a href="<?php print _U ?>salesperson/edit/<?php print $each_task['id']; ?>"><i class="glyphicon glyphicon-edit" title="Edit"></i></a>
                                     <a href="javascript:void(0);" onclick="return DeleteUser('salesperson/delete/<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>
                                     <a href="<?php print _U ?>customer/list/<?php print $each_task['id']; ?>" style="text-decoration:none;">
-                                                                            <span class="label label-info" style="cursor:pointer">View Customer</span>
-</a>
+                                        <span class="label label-info" style="cursor:pointer">View Customer</span>
+                                    </a>
 
                                 </td>
                             </tr>

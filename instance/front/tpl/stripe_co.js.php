@@ -183,7 +183,7 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript">
             // this identifies your website in the createToken call below
-            Stripe.setPublishableKey('pk_test_QYrt11CvqyjlziDYF3kf3vjl');
+            Stripe.setPublishableKey('<?php print trim($stripe_key['publish_key']); ?>');
  
             function stripeResponseHandler(status, response) {
                 if (response.error) {

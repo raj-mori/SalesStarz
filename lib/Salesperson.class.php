@@ -29,6 +29,9 @@ class Salesperson {
         $map['user_type'] = 'user_type';
         $map['password'] = 'password';
         $data['user_type'] = 'Salesperson';
+        $data['stripe_payment'] = 'stripe_payment';
+
+
         $ds = _bindArray($data, $map);
         return qi('salesperson', $ds);
     }
@@ -44,6 +47,7 @@ class Salesperson {
         $map['last_name'] = 'last_name';
         $map['email'] = 'email';
         $map['phone_no'] = 'phone_no';
+         $data['stripe_payment'] = 'stripe_payment';
 
         $ds = _bindArray($data, $map);
         $condition = "id = " . $id;

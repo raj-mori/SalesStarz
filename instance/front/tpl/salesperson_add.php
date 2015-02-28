@@ -44,6 +44,13 @@
                     </div>
                 </div>
 
+                
+                <div class="form-group">
+                    <label for="inputquestion" class="col-lg-2 control-label">Payment in $</label>
+                    <div class="col-lg-5">
+                        <input type="text" class="form-control" name="fields[stripe_payment]" id="stripe_payment" value="<?php print $payment; ?>" placeholder="payment" required>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
                         <input type="hidden" name="fields[salesperson_id]" id="user_id" value="<?php print $id_val; ?>">

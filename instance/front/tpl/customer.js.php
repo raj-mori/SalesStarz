@@ -32,7 +32,7 @@
         $('#div1').show();
         $("#success").html('<img src="<?php print _MEDIA_URL ?>img/ajax-loader.gif" />  Connecting!.....');
         $.ajax({
-            url: _U + 'customer/list',
+            url: _U + 'customer',
             type: "post",
             data: {sendMail: 1, cust_id: id},
             success: function(r) {
@@ -69,7 +69,7 @@
         $('#div1').show();
         $("#success").html('<img src="<?php print _MEDIA_URL ?>img/ajax-loader.gif" />  Connecting!.....');
         $.ajax({
-            url: _U + 'send_text',
+            url: _U + 'customer',
             type: "post",
             data: {send: 1, code: $("#country_code").val(), number: $("#number").val(), text: $("#text").val(), cust_id: $("#cust_id").val()},
             success: function(r) {

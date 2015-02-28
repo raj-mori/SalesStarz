@@ -1,4 +1,6 @@
 <?php
+$stripe_key = qs("select * from  stripe_api ");
+
 require 'lib/Stripe.php';
 
 $customer_id = base64_decode($_REQUEST['customer_id']);
@@ -6,7 +8,7 @@ $customer_id = base64_decode($_REQUEST['customer_id']);
 $customer = qs("select * from  customer where id='{$customer_id}'");
 
 if ($_POST) {
-    Stripe::setApiKey("sk_test_R6QudjkDVwAUL0RhmV0MfbiR");
+    Stripe::setApiKey(trim($_POST['stripe_api']));
     $error = '';
     $success = '';
 
@@ -25,7 +27,7 @@ if ($_POST) {
         $payment = $data['total_stripe_payment'] + 1;
 
         qu("customer", array('total_stripe_payment' => $payment), "id='{$_POST['cust_id']}'");
-        qi("customer_sales_info", array("cust_id" => $_POST['cust_id'] ,"task_column" => 'Stripe Payment', "is_stripe_payment" => 1));
+        qi("customer_sales_info", array("cust_id" => $_POST['cust_id'], "task_column" => 'Stripe Payment', "is_stripe_payment" => 1));
 
 
         $success = '<div class="alert alert-success">
@@ -193,6 +195,7 @@ if ($_POST) {
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-offset-3 col-lg-10">
+                                        <input type="hidden" id="stripe_api" name="stripe_api" value="<?php print $stripe_key['secret_key']; ?> "/>
                                         <input type="hidden" id="cust_id" name="cust_id" value="<?php print $customer_id ?> "/>
                                         <button class="btn btn-success" type="submit">Pay Now</button>
                                     </div>

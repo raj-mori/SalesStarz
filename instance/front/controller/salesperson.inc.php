@@ -55,7 +55,7 @@ $password = '';
 $email = '';
 $address = '';
 $phone = '';
-
+$payment='';
 $id_val = '';
 $add_password = 1;
 switch ($urlArgs[0]) {
@@ -74,6 +74,7 @@ switch ($urlArgs[0]) {
             $last_name = $view_data['last_name'];
             $email = $view_data['email'];
             $phone = $view_data['phone_no'];
+            $payment= $view_data['stripe_payment'];
             $id_val = $urlArgs[1];
         }
         break;
