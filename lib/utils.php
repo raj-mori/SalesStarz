@@ -309,10 +309,10 @@ function _mail($to, $subject, $content, $extra = array()) {
 
     require_once _PATH . 'lib/mail/swift/lib/swift_required.php';
 
-    if (_isLocalMachine()) {
-        //_l("To Email is overwritten by -  temp@go-brilliant.com  due to dev localmachine ");
-        $to = 'raj.mori90@gmail.com';
-    }
+//    if (_isLocalMachine()) {
+//        //_l("To Email is overwritten by -  raj.mori90@gmail.com  due to dev localmachine ");
+//        $to = 'raj.mori90@gmail.com';
+//    }
 
     $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
             ->setUsername(SMTP_EMAIL_USER_NAME)
@@ -340,4 +340,14 @@ function _mail($to, $subject, $content, $extra = array()) {
  */
 function _isLocalMachine() {
     return IS_DEV_ENV; //$_SERVER['HTTP_HOST'] == 'localhost' ? true : false;
+}
+function _cprint($key, $value, $print, $doPrint = true) {
+
+    if ($key == $value) {
+        if ($doPrint) {
+            print $print;
+        } else {
+            return $print;
+        }
+    }
 }

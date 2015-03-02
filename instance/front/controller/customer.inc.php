@@ -97,8 +97,15 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] == '') {
     if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'])) {
 
         $temp = explode("@", $_REQUEST['fields']['template']);
-        
+
         $_REQUEST['fields']['mail_subject'] = $temp[0];
+
+        $temp[1] = str_replace("{firstname}", $_REQUEST['fields']['first_name'], $temp[1]);
+        $temp[1] = str_replace("{lastname}", $_REQUEST['fields']['last_name'], $temp[1]);
+        $temp[1] = str_replace("{payment_link}", '', $temp[1]);
+
+
+
         $_REQUEST['fields']['mail_content'] = $temp[1];
 
         $new_customer_id = Customer::add($_REQUEST[fields]);
@@ -109,6 +116,12 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] == '') {
         }
     } else {
         $error = "Customer Email Available";
+
+        $first_name = $_REQUEST['fields']['first_name'];
+        $last_name = $_REQUEST['fields']['last_name'];
+        $email = $_REQUEST['fields']['email'];
+        $phone = $_REQUEST['fields']['phone_no'];
+        $mail_subject = $_REQUEST['fields']['template'];
     }
 }
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] > 0) {
@@ -116,7 +129,7 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] > 0) {
 
     if (!Customer::CheckCustomerEmail($_REQUEST['fields']['email'], $_REQUEST['fields']['customer_id'])) {
         $temp = explode("@", $_REQUEST['fields']['template']);
-        
+
         $_REQUEST['fields']['mail_subject'] = $temp[0];
         $_REQUEST['fields']['mail_content'] = $temp[1];
         $new_customer_id = Customer::update($_REQUEST['fields'], $_REQUEST['fields']['customer_id']);
@@ -128,6 +141,12 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] > 0) {
         }
     } else {
         $error = "Customer Email Available";
+        
+        $first_name = $_REQUEST['fields']['first_name'];
+        $last_name = $_REQUEST['fields']['last_name'];
+        $email = $_REQUEST['fields']['email'];
+        $phone = $_REQUEST['fields']['phone_no'];
+        $mail_subject = $_REQUEST['fields']['template'];
     }
 }
 
@@ -135,14 +154,6 @@ $addIcon = "plus";
 $addLabel = "Add Customer";
 $action_type = "add";
 
-$type = '';
-
-$password = '';
-$email = '';
-$address = '';
-$phone = '';
-$mail_content = '';
-$mail_subject = '';
 
 $id_val = '';
 $add_password = 1;
@@ -162,7 +173,7 @@ switch ($urlArgs[0]) {
             $last_name = $view_data['last_name'];
             $email = $view_data['email'];
             $mail_subject = $view_data['mail_subject'];
-            $mail_content = $view_data['mail_content'];
+
             $phone = $view_data['phone_no'];
             $id_val = $urlArgs[1];
         }

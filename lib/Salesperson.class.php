@@ -16,6 +16,7 @@ class Salesperson {
     }
 
     public static function add($fields) {
+       
         // Escape array for sql hijacking prevention
         $data = _escapeArray($fields);
 
@@ -28,8 +29,8 @@ class Salesperson {
         $map['phone_no'] = 'phone_no';
         $map['user_type'] = 'user_type';
         $map['password'] = 'password';
+        $data['stripe_payment'] = 'payment';
         $data['user_type'] = 'Salesperson';
-        $data['stripe_payment'] = 'stripe_payment';
 
 
         $ds = _bindArray($data, $map);
@@ -47,7 +48,7 @@ class Salesperson {
         $map['last_name'] = 'last_name';
         $map['email'] = 'email';
         $map['phone_no'] = 'phone_no';
-         $data['stripe_payment'] = 'stripe_payment';
+         $data['stripe_payment'] = 'payment';
 
         $ds = _bindArray($data, $map);
         $condition = "id = " . $id;

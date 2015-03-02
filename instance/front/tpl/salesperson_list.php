@@ -18,7 +18,7 @@
                             <th>Last Name </th> 
                             <th>email</th>
                             <th>Phone No</th>
-                            <th>Payment In $</th>
+                            <th>Total Sales</th>
 
                             <th>Action</th>
                         </tr>

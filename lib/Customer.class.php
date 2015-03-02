@@ -27,7 +27,7 @@ class Customer {
         $map['mail_subject'] = 'mail_subject';
         $map['mail_content'] = 'mail_content';
         $map['phone_no'] = 'phone_no';
-        $map['credit_card'] = 'credit_card';
+//        $map['credit_card'] = 'credit_card';
         $map['salesperson'] = 'salesperson';
         $data['salesperson'] = $_SESSION['user']['id'];
         $ds = _bindArray($data, $map);
@@ -45,7 +45,7 @@ class Customer {
         $map['mail_subject'] = 'mail_subject';
         $map['mail_content'] = 'mail_content';
         $map['phone_no'] = 'phone_no';
-        $map['credit_card'] = 'credit_card';
+//        $map['credit_card'] = 'credit_card';
         $map['salesperson'] = 'salesperson';
         $data['salesperson'] = $_SESSION['user']['id'];
         $ds = _bindArray($data, $map);

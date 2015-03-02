@@ -1,7 +1,6 @@
 <?php
 include "ckEditorLib.php";
 $urlArgs = _cg("url_vars");
-
 ?>
 <div class="addAffiliates actionItem">
     <div class="panel panel-default">
@@ -15,7 +14,7 @@ $urlArgs = _cg("url_vars");
                         <input type="text" class="form-control" name="fields[template_name]" id="template_name" value="<?php print $tmp_name; ?>" placeholder="Template Name" required>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="inputquestion" class="col-lg-2 control-label">Template Content</label>
                     <div class="col-lg-5" >
@@ -24,9 +23,12 @@ $urlArgs = _cg("url_vars");
                             <?php
                             if ($urlArgs[0] == 'add') {
                                 ?>
-                                         Hi {firstname} {lastname},<br>
-                                        Thank you for buying<br>
-                                        Please pay here <br>
+                                                     Hi {firstname} {lastname},<br>
+                                                    Thank you for buying<br>
+                                                    Please pay here  <br>
+                                                    {payment_link} 
+
+            <!--<a href="<?php print _U ?>stripe_co?customer_id=<?php print base64_encode($id) ?>">Click Here</a>-->
                             <?php }
                             ?>
                           
@@ -34,7 +36,7 @@ $urlArgs = _cg("url_vars");
                     </div>
                 </div>
 
-      
+
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
                         <input type="hidden" name="fields[temp_id]" id="temp_id" value="<?php print $tmp_id; ?>">

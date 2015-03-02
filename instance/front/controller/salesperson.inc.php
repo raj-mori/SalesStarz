@@ -1,13 +1,13 @@
 <?php
 
-
 error_reporting(E_ALL);
 $urlArgs = _cg("url_vars");
 
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['salesperson_id'] == '') {
-	   $check_username = Salesperson::CheckSalespersonrUsername($_REQUEST['fields']['user_name']); 
+
+    $check_username = Salesperson::CheckSalespersonrUsername($_REQUEST['fields']['user_name']);
     if (empty($check_username)) {
-		$check_email = Salesperson::CheckSalespersonrEmail($_REQUEST['fields']['email']); 
+        $check_email = Salesperson::CheckSalespersonrEmail($_REQUEST['fields']['email']);
         if (empty($check_email)) {
             $_REQUEST['fields']['password'] = md5($_REQUEST['fields']['password']);
 
@@ -19,16 +19,28 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['salesperson_id'] == '') {
             }
         } else {
             $error = "Sales Person Email Available";
+
+            $user_name = $_REQUEST['fields']['user_name'];
+            $first_name = $_REQUEST['fields']['first_name'];
+            $last_name = $_REQUEST['fields']['last_name'];
+            $email = $_REQUEST['fields']['email'];
+            $phone = $_REQUEST['fields']['phone_no'];
         }
     } else {
         $error = "Sales Person User Name Available";
+
+        $user_name = $_REQUEST['fields']['user_name'];
+        $first_name = $_REQUEST['fields']['first_name'];
+        $last_name = $_REQUEST['fields']['last_name'];
+        $email = $_REQUEST['fields']['email'];
+        $phone = $_REQUEST['fields']['phone_no'];
     }
-} 
+}
 
 if (isset($_REQUEST['fields']) && $_REQUEST['fields']['salesperson_id'] > 0) {
-	 $check_username = Salesperson::CheckSalespersonrUsername($_REQUEST['fields']['user_name'], $_REQUEST['fields']['salesperson_id']); 
+    $check_username = Salesperson::CheckSalespersonrUsername($_REQUEST['fields']['user_name'], $_REQUEST['fields']['salesperson_id']);
     if (empty($check_username)) {
-		$check_email=Salesperson::CheckSalespersonrEmail($_REQUEST['fields']['email'], $_REQUEST['fields']['salesperson_id']);
+        $check_email = Salesperson::CheckSalespersonrEmail($_REQUEST['fields']['email'], $_REQUEST['fields']['salesperson_id']);
         if (empty($check_email)) {
             $new_salesperson_id = Salesperson::update($_REQUEST['fields'], $_REQUEST['fields']['salesperson_id']);
             if ($new_salesperson_id > 0) {
@@ -39,9 +51,21 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['salesperson_id'] > 0) {
             }
         } else {
             $error = "Sales Person Email Available";
+
+            $user_name = $_REQUEST['fields']['user_name'];
+            $first_name = $_REQUEST['fields']['first_name'];
+            $last_name = $_REQUEST['fields']['last_name'];
+            $email = $_REQUEST['fields']['email'];
+            $phone = $_REQUEST['fields']['phone_no'];
         }
     } else {
         $error = "Sales Person User Name Available";
+        
+         $user_name = $_REQUEST['fields']['user_name'];
+        $first_name = $_REQUEST['fields']['first_name'];
+        $last_name = $_REQUEST['fields']['last_name'];
+        $email = $_REQUEST['fields']['email'];
+        $phone = $_REQUEST['fields']['phone_no'];
     }
 }
 
@@ -49,13 +73,8 @@ $addIcon = "plus";
 $addLabel = "Add Salesperson";
 $action_type = "add";
 
-$type = '';
-$username = '';
-$password = '';
-$email = '';
-$address = '';
-$phone = '';
-$payment='';
+
+
 $id_val = '';
 $add_password = 1;
 switch ($urlArgs[0]) {
@@ -74,7 +93,7 @@ switch ($urlArgs[0]) {
             $last_name = $view_data['last_name'];
             $email = $view_data['email'];
             $phone = $view_data['phone_no'];
-            $payment= $view_data['stripe_payment'];
+//            $payment= $view_data['stripe_payment'];
             $id_val = $urlArgs[1];
         }
         break;
@@ -102,5 +121,4 @@ switch ($urlArgs[0]) {
 
 $jsInclude = "salesperson.js.php";
 _cg("page_title", "Sales Person");
-
 ?>

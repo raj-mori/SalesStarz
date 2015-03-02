@@ -6,7 +6,7 @@ $urlArgs = _cg("url_vars");
     <div class="panel panel-default">
         <div class="panel-heading">Add New Customer Detail</div> 
         <div class="panel-body">
-            <form method="post" action="" class="form-horizontal" role="form">
+            <form method="post" action="" name="customer" class="form-horizontal" role="form">
                 <!--                <div class="form-group">
                                     <label for="inputquestion" class="col-lg-2 control-label">Username</label>
                                     <div class="col-lg-3">
@@ -42,13 +42,14 @@ $urlArgs = _cg("url_vars");
                 <div class="form-group">
                     <label for="inputquestion" class="col-lg-2 control-label">Template</label>
                     <div class="col-lg-3">
-                        <select class="form-control"  name="fields[template]" id="template">
+                        <select class="form-control"  name="fields[template]" id="template" required>
                             <option value="">Select Template</option>
                             <?php
                             $temp = q("Select * from template");
                             foreach ($temp as $each_temp) {
+                              
                                 ?>
-                                <option value="<?php print $each_temp['tmp_name'].'@'. $each_temp['tmp_content']?>"><?php print $each_temp['tmp_name'] ?> </option>
+                                <option value="<?php print $each_temp['tmp_name'].'@'. $each_temp['tmp_content']?>" <?php _cprint($mail_subject, $each_temp['tmp_name'], "selected"); ?>><?php print $each_temp['tmp_name'] ?> </option>
 
                                 <?php
                             }
@@ -83,12 +84,12 @@ $urlArgs = _cg("url_vars");
                                     </div>
                                 </div>-->
 
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label for="inputquestion" class="col-lg-2 control-label">Credit Card No.</label>
                     <div class="col-lg-3">
                         <input type="text" class="form-control" name="fields[credit_card]" id="Last Name " value="<?php print $credit_card; ?>" placeholder="Credit Card No." required>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
                         <input type="hidden" name="fields[customer_id]" id="user_id" value="<?php print $id_val; ?>">

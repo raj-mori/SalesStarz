@@ -2,7 +2,15 @@
 
     $(document).ready(function() {
 
-      
+        $('form[name=customer]').submit(function(event) {
+//            
+<?php
+if (isset($error)) {
+    event . preventDefault();
+}
+?>
+            //add stuff here
+        });
     });
     function DeleteUser(url) {
         delUrl = url;
