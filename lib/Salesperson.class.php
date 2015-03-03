@@ -29,7 +29,7 @@ class Salesperson {
         $map['phone_no'] = 'phone_no';
         $map['user_type'] = 'user_type';
         $map['password'] = 'password';
-        $data['stripe_payment'] = 'payment';
+        $data['stripe_payment'] = 'user_name';
         $data['user_type'] = 'Salesperson';
 
 

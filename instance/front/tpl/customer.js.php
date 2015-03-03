@@ -62,10 +62,12 @@ if (isset($error)) {
     }
 //send text using clicktell
 
-    function showText(id)
+    function showText(id, phone_no)
     {
 
         $("#cust_id").val(id);
+        $("#number").val(phone_no);
+
         $("#showText").modal("show");
     }
     function send()

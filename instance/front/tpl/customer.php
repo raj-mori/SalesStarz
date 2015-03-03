@@ -111,8 +111,8 @@
                         <input type="text" class="form-control" name="country_code" id="country_code"  placeholder="Code" required>
 
                     </div>
-                    <div class="col-lg-3">
-                        <input type="text" class="form-control" name="number" id="number"  placeholder="Number" required>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" name="number" id="number" value="<?php print 'fdg'?>" placeholder="Number" required>
 
                     </div>
                     <div class="clearfix">
@@ -121,7 +121,7 @@
                 <div class="form-group">
                     <label  class="col-lg-3 control-label">Message Text</label>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" name="text" id="text" required/>
+                        <textarea type="text" class="form-control "  name="text" id="text"  required></textarea>
                     </div>
                     <div class="clearfix">
                     </div>

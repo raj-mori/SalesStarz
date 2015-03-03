@@ -70,7 +70,7 @@
                                     <span class="label label-success " style="cursor:pointer" onclick="sendMail('<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-send" ></i> Send mail</span>
                                     <!--<span class="label label-success " style="cursor:pointer" onclick="showMail('<?php print $each_task['id']; ?>', '<?php print $each_task['first_name']; ?>', '<?php print $each_task['last_name']; ?>')"><i class="glyphicon glyphicon-send" ></i> Send mail</span>-->
                                     &nbsp;&nbsp;
-                                    <span class="label label-primary" style="cursor:pointer" onclick="showText('<?php print $each_task['id']; ?>')"><i class="glyphicon glyphicon-text-width" ></i> Send Text</span>
+                                    <span class="label label-primary" style="cursor:pointer" onclick="showText('<?php print $each_task['id']; ?>','<?php print $each_task['phone_no']; ?>')"><i class="glyphicon glyphicon-text-width" ></i> Send Text</span>
 
 
                                 </td>

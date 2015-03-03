@@ -102,9 +102,8 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] == '') {
 
         $temp[1] = str_replace("{firstname}", $_REQUEST['fields']['first_name'], $temp[1]);
         $temp[1] = str_replace("{lastname}", $_REQUEST['fields']['last_name'], $temp[1]);
-        $temp[1] = str_replace("{payment_link}", '', $temp[1]);
 
-
+//        $temp[1] = str_replace("{payment_link}", '<a href="'._U.' stripe_co?customer_id='. base64_encode($_REQUEST['fields']['customer_id']).'">payment_link</a>', $temp[1]);
 
         $_REQUEST['fields']['mail_content'] = $temp[1];
 
@@ -131,7 +130,12 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] > 0) {
         $temp = explode("@", $_REQUEST['fields']['template']);
 
         $_REQUEST['fields']['mail_subject'] = $temp[0];
+        
+        $temp[1] = str_replace("{firstname}", $_REQUEST['fields']['first_name'], $temp[1]);
+        $temp[1] = str_replace("{lastname}", $_REQUEST['fields']['last_name'], $temp[1]);
         $_REQUEST['fields']['mail_content'] = $temp[1];
+
+
         $new_customer_id = Customer::update($_REQUEST['fields'], $_REQUEST['fields']['customer_id']);
         if ($new_customer_id > 0) {
             $greetings = "Customer updated successfully";
@@ -141,7 +145,7 @@ if (isset($_REQUEST['fields']) && $_REQUEST['fields']['customer_id'] > 0) {
         }
     } else {
         $error = "Customer Email Available";
-        
+
         $first_name = $_REQUEST['fields']['first_name'];
         $last_name = $_REQUEST['fields']['last_name'];
         $email = $_REQUEST['fields']['email'];

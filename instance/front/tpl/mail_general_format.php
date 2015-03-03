@@ -12,9 +12,11 @@
         <tr >
             <td class="text" style=" font-family:verdana;color:#000000; text-decoration:none;font-size:11px;line-height:18px;padding-left:20px;height:50px">
 
-                <?php print $content; ?>
-             
-                <a href="<?php print _U ?>stripe_co?customer_id=<?php print base64_encode($id) ?>">Click Here</a>
+                <?php
+                $content = str_replace("{payment_link}", '<a href="' . _U . 'stripe_co?customer_id=' . base64_encode($id) . '">payment_link</a>', $content);
+                print $content;
+                ?>
+
             </td>
         </tr>
         <tr>

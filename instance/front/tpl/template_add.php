@@ -23,12 +23,16 @@ $urlArgs = _cg("url_vars");
                             <?php
                             if ($urlArgs[0] == 'add') {
                                 ?>
-                                                     Hi {firstname} {lastname},<br>
-                                                    Thank you for buying<br>
-                                                    Please pay here  <br>
-                                                    {payment_link} 
 
-            <!--<a href="<?php print _U ?>stripe_co?customer_id=<?php print base64_encode($id) ?>">Click Here</a>-->
+                                        Hi {firstname} {lastname},<br>
+
+                                        your payment: {payment_link}<br>
+
+                                        Please pay<br>
+
+                                        thanks.
+
+                                               
                             <?php }
                             ?>
                           
